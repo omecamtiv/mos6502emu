@@ -619,3 +619,4 @@ void CPU::execute() {
 			break;
 		}
 	}
+}

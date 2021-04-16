@@ -10,6 +10,11 @@ void ProgramCounter::setCounter(uWord word) {
 }
 
 void ProgramCounter::incCounter() {
-	++counter;
+	counter++;
+	return;
+}
+
+void ProgramCounter::decCounter() {
+	counter--;
 	return;
 }

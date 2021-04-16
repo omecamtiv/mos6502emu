@@ -10,6 +10,7 @@ class ProgramCounter {
 	uWord getCounter();
 	void setCounter(uWord word);
 	void incCounter();
+	void decCounter();
 };
 
 #endif

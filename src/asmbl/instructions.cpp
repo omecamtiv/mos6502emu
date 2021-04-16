@@ -10,6 +10,8 @@ void Instructions::brk(ProcessorStatus& ps) {
 	return;
 }
 
+void Instructions::nop() { return; }
+
 // Load Instruction:
 void Instructions::ldr(sByte arg, Register& reg, ProcessorStatus& ps) {
 	reg.setData(arg);
@@ -149,3 +151,116 @@ void Instructions::der(Register& reg, ProcessorStatus& ps) {
 	return;
 }
 
+// Logic Instructions:
+void Instructions::logicAND(sByte arg, Register& rega, ProcessorStatus& ps) {
+	sByte a = rega.getData();
+	sByte value = arg & a;
+	rega.setData(value);
+	if (value == 0)
+		ps.StatusFlag.Z = 1;
+	else
+		ps.StatusFlag.Z = 0;
+
+	if (value < 0)
+		ps.StatusFlag.N = 1;
+	else
+		ps.StatusFlag.N = 0;
+	return;
+}
+
+void Instructions::logicOR(sByte arg, Register& rega, ProcessorStatus& ps) {
+	sByte a = rega.getData();
+	sByte value = arg | a;
+	rega.setData(value);
+	if (value == 0)
+		ps.StatusFlag.Z = 1;
+	else
+		ps.StatusFlag.Z = 0;
+
+	if (value < 0)
+		ps.StatusFlag.N = 1;
+	else
+		ps.StatusFlag.N = 0;
+	return;
+}
+
+void Instructions::logicXOR(sByte arg, Register& rega, ProcessorStatus& ps) {
+	sByte a = rega.getData();
+	sByte value = arg ^ a;
+	rega.setData(value);
+	if (value == 0)
+		ps.StatusFlag.Z = 1;
+	else
+		ps.StatusFlag.Z = 0;
+
+	if (value < 0)
+		ps.StatusFlag.N = 1;
+	else
+		ps.StatusFlag.N = 0;
+	return;
+}
+
+// Branch Instructions:
+void Instructions::bcc(uWord addr, ProcessorStatus& ps, ProgramCounter& pc) {
+	if (ps.StatusFlag.C == 0)
+		pc.setCounter(addr);
+	else
+		pc.decCounter();
+	return;
+}
+
+void Instructions::bcs(uWord addr, ProcessorStatus& ps, ProgramCounter& pc) {
+	if (ps.StatusFlag.C == 1)
+		pc.setCounter(addr);
+	else
+		pc.decCounter();
+	return;
+}
+
+void Instructions::bne(uWord addr, ProcessorStatus& ps, ProgramCounter& pc) {
+	if (ps.StatusFlag.Z == 0)
+		pc.setCounter(addr);
+	else
+		pc.decCounter();
+	return;
+}
+
+void Instructions::beq(uWord addr, ProcessorStatus& ps, ProgramCounter& pc) {
+	if (ps.StatusFlag.Z == 1)
+		pc.setCounter(addr);
+	else
+		pc.decCounter();
+	return;
+}
+
+void Instructions::bpl(uWord addr, ProcessorStatus& ps, ProgramCounter& pc) {
+	if (ps.StatusFlag.N == 0)
+		pc.setCounter(addr);
+	else
+		pc.decCounter();
+	return;
+}
+
+void Instructions::bmi(uWord addr, ProcessorStatus& ps, ProgramCounter& pc) {
+	if (ps.StatusFlag.N == 1)
+		pc.setCounter(addr);
+	else
+		pc.decCounter();
+	return;
+}
+
+void Instructions::bvc(uWord addr, ProcessorStatus& ps, ProgramCounter& pc) {
+	if (ps.StatusFlag.V == 0)
+		pc.setCounter(addr);
+	else
+		pc.decCounter();
+	return;
+}
+
+void Instructions::bvs(uWord addr, ProcessorStatus& ps, ProgramCounter& pc) {
+	if (ps.StatusFlag.V == 1)
+		pc.setCounter(addr);
+	else
+		pc.decCounter();
+	return;
+}

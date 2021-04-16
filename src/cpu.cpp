@@ -79,8 +79,12 @@ void CPU::execute() {
 		// Misc Instructions:
 		//
 		// BRK:
-		case BRK: {
+		case BRK_IMPL: {
 			ins.brk(PS);
+			break;
+		}
+		case NOP_IMPL: {
+			ins.nop();
 			break;
 		}
 		// Load Instructions:
@@ -427,5 +431,191 @@ void CPU::execute() {
 			ins.der(Y, PS);
 			break;
 		}
+		// Logic Instructions:
+		//
+		// AND:
+		case AND_ABS: {
+			uWord addr = adm.addrm_abs(PC, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicAND(arg, A, PS);
+			break;
+		}
+		case AND_ABSX: {
+			uWord addr = adm.addrm_absx(PC, RAM, X);
+			sByte arg = RAM.read(addr);
+			ins.logicAND(arg, A, PS);
+			break;
+		}
+		case AND_ABSY: {
+			uWord addr = adm.addrm_absy(PC, RAM, Y);
+			sByte arg = RAM.read(addr);
+			ins.logicAND(arg, A, PS);
+			break;
+		}
+		case AND_IMME: {
+			sByte arg = adm.addrm_imme(PC, RAM);
+			ins.logicAND(arg, A, PS);
+			break;
+		}
+		case AND_ZP: {
+			uWord addr = adm.addrm_zp(PC, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicAND(arg, A, PS);
+			break;
+		}
+		case AND_ZPX: {
+			uWord addr = adm.addrm_zpx(PC, RAM, X);
+			sByte arg = RAM.read(addr);
+			ins.logicAND(arg, A, PS);
+			break;
+		}
+		case AND_IDXIDRX: {
+			uWord addr = adm.addrm_idxidrx(PC, X, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicAND(arg, A, PS);
+			break;
+		}
+		case AND_IDRIDXY: {
+			uWord addr = adm.addrm_idridxy(PC, Y, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicAND(arg, A, PS);
+			break;
+		}
+		// ORA:
+		case ORA_ABS: {
+			uWord addr = adm.addrm_abs(PC, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicOR(arg, A, PS);
+			break;
+		}
+		case ORA_ABSX: {
+			uWord addr = adm.addrm_absx(PC, RAM, X);
+			sByte arg = RAM.read(addr);
+			ins.logicOR(arg, A, PS);
+			break;
+		}
+		case ORA_ABSY: {
+			uWord addr = adm.addrm_absy(PC, RAM, Y);
+			sByte arg = RAM.read(addr);
+			ins.logicOR(arg, A, PS);
+			break;
+		}
+		case ORA_IMME: {
+			sByte arg = adm.addrm_imme(PC, RAM);
+			ins.logicOR(arg, A, PS);
+			break;
+		}
+		case ORA_ZP: {
+			uWord addr = adm.addrm_zp(PC, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicOR(arg, A, PS);
+			break;
+		}
+		case ORA_ZPX: {
+			uWord addr = adm.addrm_zpx(PC, RAM, X);
+			sByte arg = RAM.read(addr);
+			ins.logicOR(arg, A, PS);
+			break;
+		}
+		case ORA_IDXIDRX: {
+			uWord addr = adm.addrm_idxidrx(PC, X, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicOR(arg, A, PS);
+			break;
+		}
+		case ORA_IDRIDXY: {
+			uWord addr = adm.addrm_idridxy(PC, Y, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicOR(arg, A, PS);
+			break;
+		}
+		// EOR:
+		case EOR_ABS: {
+			uWord addr = adm.addrm_abs(PC, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicXOR(arg, A, PS);
+			break;
+		}
+		case EOR_ABSX: {
+			uWord addr = adm.addrm_absx(PC, RAM, X);
+			sByte arg = RAM.read(addr);
+			ins.logicXOR(arg, A, PS);
+			break;
+		}
+		case EOR_ABSY: {
+			uWord addr = adm.addrm_absy(PC, RAM, Y);
+			sByte arg = RAM.read(addr);
+			ins.logicXOR(arg, A, PS);
+			break;
+		}
+		case EOR_IMME: {
+			sByte arg = adm.addrm_imme(PC, RAM);
+			ins.logicXOR(arg, A, PS);
+			break;
+		}
+		case EOR_ZP: {
+			uWord addr = adm.addrm_zp(PC, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicXOR(arg, A, PS);
+			break;
+		}
+		case EOR_ZPX: {
+			uWord addr = adm.addrm_zpx(PC, RAM, X);
+			sByte arg = RAM.read(addr);
+			ins.logicXOR(arg, A, PS);
+			break;
+		}
+		case EOR_IDXIDRX: {
+			uWord addr = adm.addrm_idxidrx(PC, X, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicXOR(arg, A, PS);
+			break;
+		}
+		case EOR_IDRIDXY: {
+			uWord addr = adm.addrm_idridxy(PC, Y, RAM);
+			sByte arg = RAM.read(addr);
+			ins.logicXOR(arg, A, PS);
+			break;
+		}
+		// Branch Instructions:
+		case BCC_REL: {
+			uWord addr = adm.addrm_rel(PC, RAM);
+			ins.bcc(addr, PS, PC);
+			break;
+		}
+		case BCS_REL: {
+			uWord addr = adm.addrm_rel(PC, RAM);
+			ins.bcs(addr, PS, PC);
+			break;
+		}
+		case BNE_REL: {
+			uWord addr = adm.addrm_rel(PC, RAM);
+			ins.bne(addr, PS, PC);
+			break;
+		}
+		case BEQ_REL: {
+			uWord addr = adm.addrm_rel(PC, RAM);
+			ins.beq(addr, PS, PC);
+			break;
+		}
+		case BPL_REL: {
+			uWord addr = adm.addrm_rel(PC, RAM);
+			ins.bpl(addr, PS, PC);
+			break;
+		}
+		case BMI_REL: {
+			uWord addr = adm.addrm_rel(PC, RAM);
+			ins.bmi(addr, PS, PC);
+			break;
+		}
+		case BVC_REL: {
+			uWord addr = adm.addrm_rel(PC, RAM);
+			ins.bvc(addr, PS, PC);
+			break;
+		}
+		case BVS_REL: {
+			uWord addr = adm.addrm_rel(PC, RAM);
+			ins.bvs(addr, PS, PC);
+			break;
+		}
 	}
-}

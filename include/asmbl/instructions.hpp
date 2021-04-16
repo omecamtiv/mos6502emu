@@ -3,6 +3,7 @@
 
 #include "bit_width.hpp"
 #include "processor_status.hpp"
+#include "program_counter.hpp"
 #include "ram.hpp"
 #include "register.hpp"
 
@@ -28,6 +29,21 @@ class Instructions {
 	// Decrement Instructions:
 	void dec(uWord addr, Ram& ram, ProcessorStatus& ps);
 	void der(Register& reg, ProcessorStatus& ps);
+
+	// Logic Instructions:
+	void logicAND(sByte arg, Register& rega, ProcessorStatus& ps);
+	void logicOR(sByte arg, Register& rega, ProcessorStatus& ps);
+	void logicXOR(sByte arg, Register& rega, ProcessorStatus& ps);
+
+	// Branch Instructions:
+	void bcc(uWord addr, ProcessorStatus& ps, ProgramCounter& pc);
+	void bcs(uWord addr, ProcessorStatus& ps, ProgramCounter& pc);
+	void bne(uWord addr, ProcessorStatus& ps, ProgramCounter& pc);
+	void beq(uWord addr, ProcessorStatus& ps, ProgramCounter& pc);
+	void bpl(uWord addr, ProcessorStatus& ps, ProgramCounter& pc);
+	void bmi(uWord addr, ProcessorStatus& ps, ProgramCounter& pc);
+	void bvc(uWord addr, ProcessorStatus& ps, ProgramCounter& pc);
+	void bvs(uWord addr, ProcessorStatus& ps, ProgramCounter& pc);
 };
 
 #endif

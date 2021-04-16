@@ -19,7 +19,8 @@ class CPU {
 		// Misc Instructions:
 		//
 		// BRK:
-		BRK = 0x00,
+		BRK_IMPL = 0x00,
+		NOP_IMPL = 0xEA,
 		// Load Instructions:
 		//
 		// LDA:
@@ -102,8 +103,45 @@ class CPU {
 		// INX:
 		DEX_IMPL = 0XCA,
 		// INY:
-		DEY_IMPL = 0X88
-
+		DEY_IMPL = 0X88,
+		// Logic Instructions:
+		//
+		// AND:
+		AND_ABS = 0x2D,
+		AND_ABSX = 0x3D,
+		AND_ABSY = 0x39,
+		AND_IMME = 0x29,
+		AND_ZP = 0x25,
+		AND_ZPX = 0x35,
+		AND_IDXIDRX = 0x21,
+		AND_IDRIDXY = 0x31,
+		// ORA:
+		ORA_ABS = 0x0D,
+		ORA_ABSX = 0x1D,
+		ORA_ABSY = 0x19,
+		ORA_IMME = 0x09,
+		ORA_ZP = 0x05,
+		ORA_ZPX = 0x15,
+		ORA_IDXIDRX = 0x01,
+		ORA_IDRIDXY = 0x11,
+		// EOR:
+		EOR_ABS = 0x4D,
+		EOR_ABSX = 0x5D,
+		EOR_ABSY = 0x59,
+		EOR_IMME = 0x49,
+		EOR_ZP = 0x45,
+		EOR_ZPX = 0x55,
+		EOR_IDXIDRX = 0x41,
+		EOR_IDRIDXY = 0x51,
+		// Branch Instructions:
+		BCC_REL = 0x90,
+		BCS_REL = 0xB0,
+		BNE_REL = 0xD0,
+		BEQ_REL = 0xF0,
+		BPL_REL = 0x10,
+		BMI_REL = 0x30,
+		BVC_REL = 0x50,
+		BVS_REL = 0x70
 	} instructions;
 
        public:

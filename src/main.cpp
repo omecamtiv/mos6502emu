@@ -26,16 +26,16 @@ vector<string> getFileList() {
 
 int main() {
 	system("clear");
+	printf("\n\t    MOS 6502 EMULATOR\n");
 	CPU cpu = CPU();
 	cpu.reset();
 	while (true) {
 		char cmd[MAX_INPUT];
-		printf("[emu6502]$ ");
+		cpu.dump();
+		printf("$ ");
 		scanf("%s", cmd);
 		if (strcmp(cmd, "exit") == 0) {
 			exit(0);
-		} else if (strcmp(cmd, "dump") == 0) {
-			cpu.dump();
 		} else if (strcmp(cmd, "memdump") == 0) {
 			unsigned int sBlock, eBlock;
 			printf("[*] Enter Block [sBlock eBlock]: ");

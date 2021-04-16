@@ -31,8 +31,8 @@ void CPU::dump() {
 	pc = PC.getCounter();
 	st = (uByte)RAM.getStackPointer() + 0x0100;
 	ps = (uByte)PS.getPS();
-	printf("\t PC \tAC\tXR\tYR\t SP \tNV-BDIZC\n");
-	printf("\t%04X\t%02X\t%02X\t%02X\t%04X\t", pc, a, x, y, st);
+	printf("\n        PC  AC XR YR  SP  NV-BDIZC\n");
+	printf("[6502] %04X %02X %02X %02X %04X ", pc, a, x, y, st);
 	int mask = 0x80;
 	while (mask > 0) {
 		printf("%d", (ps & mask) > 0);

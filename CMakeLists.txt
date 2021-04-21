@@ -6,12 +6,6 @@ add_compile_definitions(SAVED_FILES="${PROJECT_BINARY_DIR}/${PROJECT_NAME}/files
 
 add_compile_definitions(OPCODES_JSON="${PROJECT_BINARY_DIR}/${PROJECT_NAME}/res/opcodes.json")
 
-include_directories(
-	include/
-	include/archt/
-	include/asmbl/
-	include/compl/)
-
 set(CMAKE_BUILD_TYPE Debug)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -28,16 +22,17 @@ file(COPY ${PROJECT_SOURCE_DIR}/res
 file(MAKE_DIRECTORY
 	${PROJECT_BINARY_DIR}/${PROJECT_NAME}/files)
 
+include_directories(${PROJECT_SOURCE_DIR}/include/)
+
 add_subdirectory(src/archt)
 add_subdirectory(src/asmbl)
 add_subdirectory(src/compl)
 
 add_executable(emu6502 
 	${PROJECT_SOURCE_DIR}/src/main.cpp
-	${PROJECT_SOURCE_DIR}/src/cpu.cpp
-	${PROJECT_SOURCE_DIR}/res/opcodes.json)
+	${PROJECT_SOURCE_DIR}/src/cpu.cpp)
 
-target_link_libraries(emu6502 PUBLIC 
-	archt
-	asmbl
-	compl)
+target_link_libraries(emu6502
+	PRIVATE archt
+	PRIVATE asmbl
+	PRIVATE compl)

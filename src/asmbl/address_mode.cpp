@@ -1,7 +1,6 @@
 #include "address_mode.hpp"
 
 #include "bit_width.hpp"
-#include "ram.hpp"
 
 uWord AddressMode::addrm_rel(ProgramCounter& pc, Ram& ram) {
 	uWord arg = (uWord)(uByte)ram.read(pc.getCounter());

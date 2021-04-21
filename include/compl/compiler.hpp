@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "json.hpp"
-#include "program_counter.hpp"
 #include "ram.hpp"
 using namespace std;
 using json = nlohmann::json;

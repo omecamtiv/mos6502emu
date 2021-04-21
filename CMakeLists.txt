@@ -27,6 +27,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include/)
 add_subdirectory(src/archt)
 add_subdirectory(src/asmbl)
 add_subdirectory(src/compl)
+add_subdirectory(src/ncurs)
 
 add_executable(emu6502 
 	${PROJECT_SOURCE_DIR}/src/main.cpp
@@ -35,4 +36,5 @@ add_executable(emu6502
 target_link_libraries(emu6502
 	PRIVATE archt
 	PRIVATE asmbl
-	PRIVATE compl)
+	PRIVATE compl
+	PRIVATE ncurs)

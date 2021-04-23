@@ -8,3 +8,6 @@ compile_commands.json
 
 # Ignore .cache folder
 .cache/
+
+# Ignore .bak file
+*.bak

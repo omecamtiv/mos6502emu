@@ -5,4 +5,4 @@ then
 	mkdir ./build
 fi
 
-cmake -H. -B build
+cmake -DCURSES_LIBRARY=/data/data/com.termux/files/usr/lib/libncurses.so -DCURSES_INCLUDE_PATH=/data/data/com.termux/files/usr/include -H. -B build

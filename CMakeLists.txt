@@ -22,7 +22,8 @@ file(COPY ${PROJECT_SOURCE_DIR}/res
 file(MAKE_DIRECTORY
 	${PROJECT_BINARY_DIR}/${PROJECT_NAME}/files)
 
-include_directories(${PROJECT_SOURCE_DIR}/include/)
+include_directories(${PROJECT_SOURCE_DIR}/include/ 
+	${CURSES_INCLUDE_PATH})
 
 add_subdirectory(src/archt)
 add_subdirectory(src/asmbl)
@@ -37,4 +38,5 @@ target_link_libraries(emu6502
 	PRIVATE archt
 	PRIVATE asmbl
 	PRIVATE compl
-	PRIVATE ncurs)
+	PRIVATE ncurs
+	PRIVATE ${CURSES_LIBRARY})

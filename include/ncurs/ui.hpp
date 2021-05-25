@@ -4,15 +4,9 @@
 #include <ncurses.h>
 
 class UI {
-	void init_base();
-	void init_status(WINDOW *win, WINDOW *parent_win);
-	void init_cmd(WINDOW *win, WINDOW *parent_win);
-	void init_ram(WINDOW *win, WINDOW *parent_win);
-	void init_menu(WINDOW *win, WINDOW *parent_win);
-
        public:
-	WINDOW *base_win, *status_win, *ram_win, *menu_win, *cmd_win;
-	void initui();
+	void create_win(WINDOW* win, int row, int col, int posy, int posx,
+			const char* label);
 };
 
 #endif
